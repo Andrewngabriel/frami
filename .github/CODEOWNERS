@@ -1,0 +1,18 @@
+# Global owners - require approval for all changes
+* @andrewngabriel
+
+# Workflow files - require maintainer approval
+/.github/ @andrewngabriel
+
+# Publishing and release files - require maintainer approval
+/package.json @andrewngabriel
+/PUBLISHING.md @andrewngabriel
+/.npmignore @andrewngabriel
+
+# Core library files - require maintainer approval for major changes
+/src/index.ts @andrewngabriel
+/src/core/ @andrewngabriel
+
+# Configuration files - require maintainer approval
+/tsconfig.json @andrewngabriel
+/jest.config.js @andrewngabriel

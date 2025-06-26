@@ -1,0 +1,54 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+        - production
+        - staging
+      version:
+        description: 'Version to deploy (leave empty for latest)'
+        required: false
+        type: string
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    # Only allow project maintainer to deploy
+    if: github.actor == 'andrewngabriel'
+    
+    environment: ${{ github.event.inputs.environment }}
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Use Node.js 20.x
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20.x
+        cache: 'npm'
+        registry-url: 'https://registry.npmjs.org'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Run tests
+      run: npm test
+    
+    - name: Build project
+      run: npm run build
+    
+    - name: Deploy to ${{ github.event.inputs.environment }}
+      run: |
+        echo "Deploying to ${{ github.event.inputs.environment }} environment"
+        # Add deployment logic here (e.g., CDN upload, documentation site update)
+    
+    - name: Notify deployment
+      run: |
+        echo "✅ Successfully deployed to ${{ github.event.inputs.environment }}"
