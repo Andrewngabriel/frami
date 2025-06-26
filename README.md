@@ -2,6 +2,8 @@
 
 A TypeScript library for intelligent video thumbnail recommendation using AI vision models. Frami analyzes video frames to recommend the most engaging thumbnails for improved click-through rates.
 
+![cover.png](cover.png)
+
 ## Features
 
 - 🎯 **Smart Frame Selection**: AI-powered analysis of video frames for optimal thumbnail selection
